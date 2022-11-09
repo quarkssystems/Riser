@@ -1,0 +1,4962 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Riser API",
+        "description": "API to interact with Riser",
+        "contact": {
+            "name": "API Support"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000",
+            "description": "Dynamic host server"
+        }
+    ],
+    "paths": {
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Normal Login",
+                "description": "Normal Login",
+                "operationId": "login",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "phone_number",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "phone_number": {
+                                        "description": "Phone number of the user",
+                                        "type": "string",
+                                        "example": "999999999"
+                                    },
+                                    "password": {
+                                        "description": "Password",
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "secret"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Validator Error"
+                    },
+                    "401": {
+                        "description": "Authentication Error"
+                    },
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/social-login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Social Login",
+                "description": "Social Login",
+                "operationId": "socialLogin",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "provider",
+                                    "provider_id",
+                                    "first_name",
+                                    "last_name",
+                                    "provider_token"
+                                ],
+                                "properties": {
+                                    "provider": {
+                                        "description": "Provider Name",
+                                        "type": "string",
+                                        "example": "google"
+                                    },
+                                    "email": {
+                                        "description": "Email",
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "contact_number": {
+                                        "description": "contact_number",
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "provider_id": {
+                                        "description": "provider id",
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "first_name": {
+                                        "description": "first name",
+                                        "type": "string",
+                                        "example": "First name"
+                                    },
+                                    "last_name": {
+                                        "description": "last name",
+                                        "type": "string",
+                                        "example": "Last name"
+                                    },
+                                    "profile_picture": {
+                                        "type": "",
+                                        "example": ""
+                                    },
+                                    "provider_token": {
+                                        "description": "provider token",
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "referral_code": {
+                                        "description": "provider token",
+                                        "type": "string",
+                                        "example": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/v1/logout": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Logout",
+                "description": "Logout",
+                "operationId": "logout",
+                "responses": {
+                    "401": {
+                        "description": "Token Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/register-user": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Creator/ Agent Registration",
+                "description": "Creator/ Agent Registration",
+                "operationId": "registerUser",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "profile_type",
+                                    "first_name",
+                                    "last_name",
+                                    "email",
+                                    "contact_number",
+                                    "whatsapp_number",
+                                    "user_id"
+                                ],
+                                "properties": {
+                                    "profile_type": {
+                                        "description": "",
+                                        "type": "string",
+                                        "example": "creator"
+                                    },
+                                    "user_id": {
+                                        "type": "integer",
+                                        "example": ""
+                                    },
+                                    "first_name": {
+                                        "description": "",
+                                        "type": "string",
+                                        "example": "First Name"
+                                    },
+                                    "last_name": {
+                                        "description": "",
+                                        "type": "string",
+                                        "example": "Last Name"
+                                    },
+                                    "email": {
+                                        "description": "",
+                                        "type": "string",
+                                        "example": "John@riser.in"
+                                    },
+                                    "contact_number": {
+                                        "type": "string",
+                                        "example": "9812345678"
+                                    },
+                                    "whatsapp_number": {
+                                        "type": "string",
+                                        "example": "9812345678"
+                                    },
+                                    "user_skills": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "user_experience": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "business_name": {
+                                        "type": "",
+                                        "example": ""
+                                    },
+                                    "about_me": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "facebook_link": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "twitter_link": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "linkedin_link": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "instagram_link": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "youtube_link": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "referral_code": {
+                                        "type": "string",
+                                        "example": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/register-via-phone": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Registration via phone number",
+                "description": "Registration via phone number",
+                "operationId": "registerViaPhone",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "phone_number"
+                                ],
+                                "properties": {
+                                    "phone_number": {
+                                        "type": "string",
+                                        "example": "9812345678"
+                                    },
+                                    "referral_code": {
+                                        "type": "string",
+                                        "example": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/v1/call-booking-packages": {
+            "get": {
+                "tags": [
+                    "Call Booking"
+                ],
+                "summary": "Get Call Booking Packages List",
+                "description": "Returns list of Call Booking Packages",
+                "operationId": "getCallBookingPackages",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page No. (optional) - default 1",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per Page (optional) - default 15",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/call-booking-request": {
+            "post": {
+                "tags": [
+                    "Call Booking"
+                ],
+                "summary": "Call Booking Request",
+                "description": "Call Booking Request API",
+                "operationId": "callBookingRequest",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "creator_id",
+                                    "call_package_id",
+                                    "booking_date",
+                                    "start_time"
+                                ],
+                                "properties": {
+                                    "creator_id": {
+                                        "description": "Id of creator whom call is booking",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "call_package_id": {
+                                        "description": "Call Package Id",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "booking_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2022-07-20"
+                                    },
+                                    "start_time": {
+                                        "type": "string",
+                                        "example": "01:30 PM"
+                                    },
+                                    "booking_message": {
+                                        "type": "string",
+                                        "example": "Message about the booking purpose"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/call-booking-list": {
+            "get": {
+                "tags": [
+                    "Call Booking"
+                ],
+                "summary": "Get Call Booking List",
+                "description": "Returns list of Call Booking",
+                "operationId": "getCallBookingList",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page No. (optional) - default 1",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per Page (optional) - default 15",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "screen",
+                        "in": "query",
+                        "description": "Screen Name",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "user",
+                            "enum": [
+                                "user",
+                                "creator"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "filter_by_status",
+                        "in": "query",
+                        "description": "Filter data based on booking status",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "requested",
+                            "enum": [
+                                "requested",
+                                "booked",
+                                "attended",
+                                "missed"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "filter_by",
+                        "in": "query",
+                        "description": "Filter data based on dates (Optional)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "all",
+                            "enum": [
+                                "today",
+                                "yesterday",
+                                "7-day",
+                                "this-month",
+                                "last-month",
+                                "all"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/accept-reject-call": {
+            "post": {
+                "tags": [
+                    "Call Booking"
+                ],
+                "summary": "Accept or Reject Call",
+                "description": "Accept or Reject Call",
+                "operationId": "acceptRejectCall",
+                "parameters": [
+                    {
+                        "name": "call_booking_id",
+                        "in": "query",
+                        "description": "Call Booking Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "action",
+                        "in": "query",
+                        "description": "Accept or Reject",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "accept",
+                            "enum": [
+                                "accept",
+                                "reject"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/book-call-after-payment": {
+            "post": {
+                "tags": [
+                    "Call Booking"
+                ],
+                "summary": "Book call after payment",
+                "description": "Book call after payment",
+                "operationId": "bookCallAfterPayment",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "call_booking_id",
+                                    "payment_gateway",
+                                    "transaction_id"
+                                ],
+                                "properties": {
+                                    "call_booking_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "payment_gateway": {
+                                        "type": "string",
+                                        "example": "paytm"
+                                    },
+                                    "transaction_id": {
+                                        "type": "string",
+                                        "example": "34hdfhjd378343yu3ui4"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/join-call": {
+            "post": {
+                "tags": [
+                    "Call Booking"
+                ],
+                "summary": "Join Call",
+                "description": "Join Call",
+                "operationId": "joinCall",
+                "parameters": [
+                    {
+                        "name": "call_booking_id",
+                        "in": "query",
+                        "description": "Call Booking Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/send-message": {
+            "post": {
+                "tags": [
+                    "Message"
+                ],
+                "summary": "send Message",
+                "description": "send Message",
+                "operationId": "sendMessage",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "receiver_id"
+                                ],
+                                "properties": {
+                                    "receiver_id": {
+                                        "type": "integer"
+                                    },
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                    "files[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/get-recent-chat": {
+            "get": {
+                "tags": [
+                    "Message"
+                ],
+                "summary": "get Recent Chat",
+                "description": "get Recent Chat",
+                "operationId": "getRecentChat",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "user id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/get-recent-chat-list": {
+            "get": {
+                "tags": [
+                    "Message"
+                ],
+                "summary": "get Recent Chat List",
+                "description": "get Recent Chat List",
+                "operationId": "getRecentChatList",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/is-read": {
+            "post": {
+                "tags": [
+                    "Message"
+                ],
+                "summary": "isRead Message",
+                "description": "isRead Message",
+                "operationId": "isRead",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "message_id"
+                                ],
+                                "properties": {
+                                    "message_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/countries-list": {
+            "get": {
+                "tags": [
+                    "Common Lists"
+                ],
+                "summary": "Get Countries List",
+                "description": "Returns list of Countries",
+                "operationId": "getCountriesList",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page No. (optional) - default 1",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per Page (optional) - default 15",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "txt_search",
+                        "in": "query",
+                        "description": "Search Text. (optional)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/states-list": {
+            "post": {
+                "tags": [
+                    "Common Lists"
+                ],
+                "summary": "Get States List",
+                "description": "Returns list of States",
+                "operationId": "getStatesList",
+                "parameters": [
+                    {
+                        "name": "country_id",
+                        "in": "query",
+                        "description": "Id of Country",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page No. (optional) - default 1",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per Page (optional) - default 15",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "txt_search",
+                        "in": "query",
+                        "description": "Search Text. (optional)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/districts-list": {
+            "post": {
+                "tags": [
+                    "Common Lists"
+                ],
+                "summary": "Get Districts List",
+                "description": "Returns list of Districts",
+                "operationId": "getDistrictsList",
+                "parameters": [
+                    {
+                        "name": "state_id",
+                        "in": "query",
+                        "description": "Id of State",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page No. (optional) - default 1",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per Page (optional) - default 15",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "txt_search",
+                        "in": "query",
+                        "description": "Search Text. (optional)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/talukas-list": {
+            "post": {
+                "tags": [
+                    "Common Lists"
+                ],
+                "summary": "Get Talukas List",
+                "description": "Returns list of Talukas",
+                "operationId": "getTalukasList",
+                "parameters": [
+                    {
+                        "name": "district_id",
+                        "in": "query",
+                        "description": "Id of District",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page No. (optional) - default 1",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per Page (optional) - default 15",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "txt_search",
+                        "in": "query",
+                        "description": "Search Text. (optional)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/search-location": {
+            "post": {
+                "tags": [
+                    "Common Lists"
+                ],
+                "summary": "Search location",
+                "description": "Returns list of location based on coutry, state, district or taluka",
+                "operationId": "searchLocation",
+                "parameters": [
+                    {
+                        "name": "txt_search",
+                        "in": "query",
+                        "description": "Search Text",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page No. (optional) - default 1",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per Page (optional) - default 15",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/cms-page/{slug}": {
+            "get": {
+                "tags": [
+                    "Common Lists"
+                ],
+                "summary": "Get Page By Slug",
+                "description": "Returns Page By Slug",
+                "operationId": "getCmsPage",
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "description": "Slug",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "privacy-policy"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/languages-list": {
+            "get": {
+                "tags": [
+                    "Common Lists"
+                ],
+                "summary": "Get Languages List",
+                "description": "Returns list of Languages",
+                "operationId": "getLanguagesList",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page No. (optional) - default 1",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per Page (optional) - default 15",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "txt_search",
+                        "in": "query",
+                        "description": "Search Text. (optional)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "en"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/categories-list": {
+            "get": {
+                "tags": [
+                    "Common Lists"
+                ],
+                "summary": "Get Categories List",
+                "description": "Returns list of Categories",
+                "operationId": "getCategoriesList",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page No. (optional) - default 1",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per Page (optional) - default 15",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "txt_search",
+                        "in": "query",
+                        "description": "Search Text. (optional)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "abc"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/api/v1/hashtags-list": {
+            "get": {
+                "tags": [
+                    "Common Lists"
+                ],
+                "summary": "Get Hashtags List",
+                "description": "Returns list of Hashtags",
+                "operationId": "getHashtagsList",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page No. (optional) - default 1",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per Page (optional) - default 15",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "txt_search",
+                        "in": "query",
+                        "description": "Search Text. (optional)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "xyz"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/banners/{slug}": {
+            "get": {
+                "tags": [
+                    "Common Lists"
+                ],
+                "summary": "Get Banners",
+                "description": "Returns Banners",
+                "operationId": "getBanners",
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "description": "Slug",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "search-screen"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/v1/send-feedback": {
+            "post": {
+                "tags": [
+                    "Common Lists"
+                ],
+                "summary": "Send Feedback",
+                "description": "Send Feedback with star rating and comment",
+                "operationId": "sendFeedback",
+                "parameters": [
+                    {
+                        "name": "rating",
+                        "in": "query",
+                        "description": "Start Rating",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "feedback",
+                        "in": "query",
+                        "description": "Feedback from user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/generate-meeting-identity-token": {
+            "post": {
+                "tags": [
+                    "Common Lists"
+                ],
+                "summary": "generate Meeting Identity Token",
+                "description": "generate Meeting Identity Token",
+                "operationId": "generateMeetingIdentityToken",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User Name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "module_name",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "master_class",
+                                "call_booking"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "module_id",
+                        "in": "query",
+                        "description": "Module Id",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id_of_user",
+                        "in": "query",
+                        "description": "Id Of User",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/generate-meeting-privileges-token": {
+            "post": {
+                "tags": [
+                    "Common Lists"
+                ],
+                "summary": "generate Meeting Privileges Token",
+                "description": "generate Meeting Privileges Token",
+                "operationId": "generateMeetingPrivilegesToken",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User Id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "room_id",
+                        "in": "query",
+                        "description": "Room Id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "stream_id_list",
+                        "in": "query",
+                        "description": "Stream Id List, if multiple use comma seperated",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/devices": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Store Device token for user",
+                "description": "Store Device token for user",
+                "operationId": "store",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "Device token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Delete Device token for user",
+                "description": "Delete Device token for user",
+                "operationId": "destroy",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "Device token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/create-master-class": {
+            "post": {
+                "tags": [
+                    "Master Class"
+                ],
+                "summary": "Create Master Class",
+                "description": "Create Master Class API",
+                "operationId": "createMasterClass",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "category_id",
+                                    "start_date",
+                                    "start_time",
+                                    "amount",
+                                    "banner_image"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "This is title for master class"
+                                    },
+                                    "category_id": {
+                                        "description": "Category IDs if multiple send with comma seperated",
+                                        "type": "string",
+                                        "example": "1,2"
+                                    },
+                                    "start_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2022-07-05"
+                                    },
+                                    "start_time": {
+                                        "type": "string",
+                                        "example": "01:30 PM"
+                                    },
+                                    "amount": {
+                                        "type": "number",
+                                        "format": "double",
+                                        "example": "1000"
+                                    },
+                                    "banner_image": {
+                                        "type": "file"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/master-class-list": {
+            "get": {
+                "tags": [
+                    "Master Class"
+                ],
+                "summary": "Get Master Class List",
+                "description": "Returns list of Master Class",
+                "operationId": "getMasterClassList",
+                "parameters": [
+                    {
+                        "name": "show_old",
+                        "in": "query",
+                        "description": "Display Old Data",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page No. (optional) - default 1",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per Page (optional) - default 15",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User Id (optional) - default logged in user",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/edit-master-class": {
+            "post": {
+                "tags": [
+                    "Master Class"
+                ],
+                "summary": "Edit Master Class",
+                "description": "Edit Master Class",
+                "operationId": "editMasterClass",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id",
+                                    "title",
+                                    "category_id",
+                                    "start_date",
+                                    "start_time"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "This is title for master class"
+                                    },
+                                    "category_id": {
+                                        "description": "Category IDs if multiple send with comma seperated",
+                                        "type": "string",
+                                        "example": "1,2"
+                                    },
+                                    "start_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2022-07-05"
+                                    },
+                                    "start_time": {
+                                        "type": "string",
+                                        "example": "01:30 PM"
+                                    },
+                                    "banner_image": {
+                                        "type": "file"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/delete-master-class": {
+            "delete": {
+                "tags": [
+                    "Master Class"
+                ],
+                "summary": "Delete Master Class",
+                "description": "Delete Master Class",
+                "operationId": "deleteMasterClass",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/enroll-master-class": {
+            "post": {
+                "tags": [
+                    "Master Class"
+                ],
+                "summary": "Enroll Master Class",
+                "description": "Enroll Master Class",
+                "operationId": "enrollMasterClass",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "payment_gateway",
+                                    "transaction_id"
+                                ],
+                                "properties": {
+                                    "master_class_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "promoter_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "payment_gateway": {
+                                        "type": "string",
+                                        "example": "paytm"
+                                    },
+                                    "transaction_id": {
+                                        "type": "string",
+                                        "example": "34hdfhjd378343yu3ui4"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/master-class-list-by-category": {
+            "get": {
+                "tags": [
+                    "Master Class"
+                ],
+                "summary": "Get Master Class List By Category",
+                "description": "Returns list of Master Class by category",
+                "operationId": "getMasterClassListByCategory",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page No. (optional) - default 1",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per Page (optional) - default 15",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "category_id",
+                        "in": "query",
+                        "description": "Category Id (optional) - default all",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/api/v1/promote-master-class": {
+            "post": {
+                "tags": [
+                    "Master Class"
+                ],
+                "summary": "Promote Master Class",
+                "description": "Promote Master Class",
+                "operationId": "promoteMasterClass",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "master_class_id"
+                                ],
+                                "properties": {
+                                    "master_class_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/master-class-detail": {
+            "get": {
+                "tags": [
+                    "Master Class"
+                ],
+                "summary": "Get Master Class Detail",
+                "description": "Returns data of Master Class Detail",
+                "operationId": "getMasterClassDetail",
+                "parameters": [
+                    {
+                        "name": "master_class_id",
+                        "in": "query",
+                        "description": "Master Class Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "filter_by",
+                        "in": "query",
+                        "description": "Filter data based on dates (Optional)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "all",
+                            "enum": [
+                                "today",
+                                "yesterday",
+                                "7-day",
+                                "this-month",
+                                "last-month",
+                                "all"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/get-master-class-bookings": {
+            "get": {
+                "tags": [
+                    "Master Class"
+                ],
+                "summary": "Get Master Class Bookings",
+                "description": "Returns list of Master Class Bookings",
+                "operationId": "getMasterClassBookings",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page No. (optional) - default 1",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per Page (optional) - default 15",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "screen",
+                        "in": "query",
+                        "description": "Screen Name",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "user",
+                            "enum": [
+                                "user",
+                                "creator"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "filter_by_status",
+                        "in": "query",
+                        "description": "Filter data based on booking status",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "booked",
+                            "enum": [
+                                "booked",
+                                "attended",
+                                "missed"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "filter_by",
+                        "in": "query",
+                        "description": "Filter data based on dates (Optional)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "all",
+                            "enum": [
+                                "today",
+                                "yesterday",
+                                "7-day",
+                                "this-month",
+                                "last-month",
+                                "all"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/get-affiliate": {
+            "get": {
+                "tags": [
+                    "Master Class"
+                ],
+                "summary": "Get Affiliates detail for user",
+                "description": "Returns data of affiliates",
+                "operationId": "getAffiliate",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page No. (optional) - default 1",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per Page (optional) - default 15",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "tab_name",
+                        "in": "query",
+                        "description": "Tab Name",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "promoted-by-me",
+                            "enum": [
+                                "promoted-by-me",
+                                "my-promoter"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "filter_by",
+                        "in": "query",
+                        "description": "Filter data based on dates (Optional)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "all",
+                            "enum": [
+                                "today",
+                                "yesterday",
+                                "7-day",
+                                "this-month",
+                                "last-month",
+                                "all"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/update-meeting-link": {
+            "post": {
+                "tags": [
+                    "Master Class",
+                    "Call Booking"
+                ],
+                "summary": "Update Meeting Link",
+                "description": "Update Meeting Link",
+                "operationId": "updateMeetingLink",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Master Class or Call Booking ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "meeting_link",
+                        "in": "query",
+                        "description": "Meeting Link for Call",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "module_name",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "master_class",
+                            "enum": [
+                                "master_class",
+                                "call_booking"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/update-mastar-class-start": {
+            "post": {
+                "tags": [
+                    "Master Class"
+                ],
+                "summary": "Update Master Class Started Flag",
+                "description": "Update Master Class Started Flag",
+                "operationId": "updateMasterClassStart",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Master Class ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "is_started",
+                        "in": "query",
+                        "description": "Is Master Class Started",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "default": "1",
+                            "enum": [
+                                "1",
+                                "0"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v2/create-master-class": {
+            "post": {
+                "tags": [
+                    "Master Class"
+                ],
+                "summary": "Create Master Class",
+                "description": "Create Master Class API",
+                "operationId": "createMultiMasterClass",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "category_id",
+                                    "class_type",
+                                    "class_dates",
+                                    "amount",
+                                    "banner_image"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "This is title for master class"
+                                    },
+                                    "category_id": {
+                                        "description": "Category IDs if multiple send with comma seperated",
+                                        "type": "string",
+                                        "example": "1,2"
+                                    },
+                                    "class_type": {
+                                        "description": "Master class type",
+                                        "type": "string",
+                                        "default": "single",
+                                        "enum": [
+                                            "single",
+                                            "multi"
+                                        ]
+                                    },
+                                    "total_days": {
+                                        "description": "Master class days if mulitple selected",
+                                        "type": "integer"
+                                    },
+                                    "class_dates": {
+                                        "description": "Master class dates",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "example": {
+                                                "start_date": "2022-07-05",
+                                                "start_time": "01:30 PM",
+                                                "duration": "30"
+                                            }
+                                        }
+                                    },
+                                    "amount": {
+                                        "type": "number",
+                                        "format": "double",
+                                        "example": "1000"
+                                    },
+                                    "banner_image": {
+                                        "type": "file"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/create-checksum": {
+            "post": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "Create Checksum",
+                "description": "Create Checksum API",
+                "operationId": "createChecksum",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "master_class_id"
+                                ],
+                                "properties": {
+                                    "master_class_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "order_id": {
+                                        "type": "string",
+                                        "example": "RA00001"
+                                    },
+                                    "amount": {
+                                        "type": "integer",
+                                        "example": "100"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/transaction-status": {
+            "post": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "Transaction Status",
+                "description": "Transaction Status API",
+                "operationId": "transactionStatus",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "order_id"
+                                ],
+                                "properties": {
+                                    "order_id": {
+                                        "type": "string",
+                                        "example": "RA00001"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/create-post": {
+            "post": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Create Post",
+                "description": "Create Post API",
+                "operationId": "createPost",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "language_id",
+                                    "category_id",
+                                    "media_type",
+                                    "media_url"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "This is my first post"
+                                    },
+                                    "language_id": {
+                                        "type": "string",
+                                        "example": "1,2"
+                                    },
+                                    "category_id": {
+                                        "type": "string",
+                                        "example": "1,2"
+                                    },
+                                    "hashtags": {
+                                        "type": "string",
+                                        "example": "one,two"
+                                    },
+                                    "country_id": {
+                                        "type": "string",
+                                        "example": "101"
+                                    },
+                                    "state_id": {
+                                        "type": "string",
+                                        "example": "12"
+                                    },
+                                    "district_id": {
+                                        "type": "string",
+                                        "example": "468"
+                                    },
+                                    "taluka_id": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "media_type": {
+                                        "type": "string",
+                                        "default": "video",
+                                        "enum": [
+                                            "image",
+                                            "video",
+                                            "audio"
+                                        ]
+                                    },
+                                    "media_url": {
+                                        "type": "file"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/post-list": {
+            "get": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Get Post List",
+                "description": "Returns list of Post",
+                "operationId": "getPostList",
+                "parameters": [
+                    {
+                        "name": "post_id",
+                        "in": "query",
+                        "description": "Post ID",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User ID",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "category_id",
+                        "in": "query",
+                        "description": "Category ID",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page No. (optional) - default 1",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per Page (optional) - default 15",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/api/v1/user-post-list": {
+            "get": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Get User's Post List",
+                "description": "Returns list of Post for User",
+                "operationId": "getUserPostList",
+                "parameters": [
+                    {
+                        "name": "post_id",
+                        "in": "query",
+                        "description": "Post ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User ID",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page No. (optional) - default 1",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per Page (optional) - default 15",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/api/v1/post-detail": {
+            "get": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Get Post Detail",
+                "description": "Returns detail of Post",
+                "operationId": "getPostDetail",
+                "parameters": [
+                    {
+                        "name": "post_id",
+                        "in": "query",
+                        "description": "Post ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/post-detail-likes": {
+            "get": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Get Post Detail Likes",
+                "description": "Returns likes by users of Post",
+                "operationId": "getPostDetailLikes",
+                "parameters": [
+                    {
+                        "name": "post_id",
+                        "in": "query",
+                        "description": "Post ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page No. (optional) - default 1",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per Page (optional) - default 15",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/post-detail-comments": {
+            "get": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Get Post Detail Comments",
+                "description": "Returns comments by users of Post",
+                "operationId": "getPostDetailComments",
+                "parameters": [
+                    {
+                        "name": "post_id",
+                        "in": "query",
+                        "description": "Post ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page No. (optional) - default 1",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per Page (optional) - default 15",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/add-post-comments": {
+            "post": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "add Post Comments",
+                "description": "add Post Comments",
+                "operationId": "addPostComments",
+                "parameters": [
+                    {
+                        "name": "post_id",
+                        "in": "query",
+                        "description": "Post ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "comments",
+                        "in": "query",
+                        "description": "Comments",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "parent_id",
+                        "in": "query",
+                        "description": "Parent ID",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/like-dislike": {
+            "post": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Like Dislike",
+                "description": "Like Dislike Post - action can be (like, dislike)",
+                "operationId": "likeDislike",
+                "parameters": [
+                    {
+                        "name": "post_id",
+                        "in": "query",
+                        "description": "Post ID to like/dislike",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "action",
+                        "in": "query",
+                        "description": "Like or Dislike",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "like",
+                            "enum": [
+                                "like",
+                                "dislike"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/report-post": {
+            "post": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Report Post",
+                "description": "Report Post - action can be (report, withdraw-report)",
+                "operationId": "reportPost",
+                "parameters": [
+                    {
+                        "name": "post_id",
+                        "in": "query",
+                        "description": "Post ID to Report/Withdraw-Report",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "action",
+                        "in": "query",
+                        "description": "Report or Withdraw-Report",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "report",
+                            "enum": [
+                                "report",
+                                "withdraw-report"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/report-profile": {
+            "post": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Report Profile",
+                "description": "Report Profile - action can be (report, withdraw-report)",
+                "operationId": "reportProfile",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User ID to Report/Withdraw-Report",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "action",
+                        "in": "query",
+                        "description": "Report or Withdraw-Report",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "report",
+                            "enum": [
+                                "report",
+                                "withdraw-report"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/search-profile-or-video": {
+            "post": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Search Profile or Video",
+                "description": "Search Profile or Video - search by can be (profile, video)",
+                "operationId": "searchProfileOrVideo",
+                "parameters": [
+                    {
+                        "name": "search_term",
+                        "in": "query",
+                        "description": "Search Term/Text",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "search_by",
+                        "in": "query",
+                        "description": "Profile or Video",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "profile",
+                            "enum": [
+                                "profile",
+                                "video"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page No. (optional) - default 1",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per Page (optional) - default 15",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/update-views": {
+            "post": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Update Post Views",
+                "description": "Update Post Views",
+                "operationId": "updateViews",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Post Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/api/v1/delete-post": {
+            "delete": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Delete Post",
+                "description": "Delete Post",
+                "operationId": "deletePost",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/block-post": {
+            "post": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Block Post",
+                "description": "Block Post - action can be (block, unblock)",
+                "operationId": "blockPost",
+                "parameters": [
+                    {
+                        "name": "post_id",
+                        "in": "query",
+                        "description": "Post ID to block/unblock",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "action",
+                        "in": "query",
+                        "description": "Block or Unblock",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "block",
+                            "enum": [
+                                "block",
+                                "unblock"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/razorpay-create-order": {
+            "post": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "Create order on razorpay using API",
+                "description": "Create order on razorpay using API",
+                "operationId": "razorPayCreateOrder",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "user_id",
+                                    "module_name",
+                                    "module_id"
+                                ],
+                                "properties": {
+                                    "user_id": {
+                                        "type": "number",
+                                        "format": "integer",
+                                        "example": "1"
+                                    },
+                                    "module_name": {
+                                        "type": "string",
+                                        "default": "master_class",
+                                        "enum": [
+                                            "master_class",
+                                            "call_booking"
+                                        ]
+                                    },
+                                    "module_id": {
+                                        "type": "number",
+                                        "format": "integer",
+                                        "example": "1"
+                                    },
+                                    "amount": {
+                                        "type": "number",
+                                        "format": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/add-bank-account": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Add Bank Account",
+                "description": "Add Bank Account API",
+                "operationId": "addBankAccount",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "full_name",
+                                    "account_number",
+                                    "ifsc_code",
+                                    "bank_name",
+                                    "branch_name"
+                                ],
+                                "properties": {
+                                    "full_name": {
+                                        "description": "Full name of user appear on bank account",
+                                        "type": "string",
+                                        "example": "John Smith"
+                                    },
+                                    "account_number": {
+                                        "description": "Account number for bank",
+                                        "type": "string",
+                                        "example": "4545677BB787"
+                                    },
+                                    "ifsc_code": {
+                                        "description": "IFSC number for bank",
+                                        "type": "string",
+                                        "example": "ICI232322"
+                                    },
+                                    "bank_name": {
+                                        "description": "Bank name",
+                                        "type": "string",
+                                        "example": "SBI"
+                                    },
+                                    "branch_name": {
+                                        "description": "Branch name of bank",
+                                        "type": "string",
+                                        "example": "C.G. Road Branch"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/get-bank-accounts": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get Bank Accounts",
+                "description": "Get Bank Accounts",
+                "operationId": "getBankAccounts",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page No. (optional) - default 1",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per Page (optional) - default 15",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/edit-bank-account": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Edit Bank Account",
+                "description": "Edit Bank Account API",
+                "operationId": "editBankAccount",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "full_name",
+                                    "account_number",
+                                    "ifsc_code",
+                                    "bank_name",
+                                    "branch_name"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "description": "Bank account id primary key",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "full_name": {
+                                        "description": "Full name of user appear on bank account",
+                                        "type": "string",
+                                        "example": "John Smith"
+                                    },
+                                    "account_number": {
+                                        "description": "Account number for bank",
+                                        "type": "string",
+                                        "example": "4545677BB787"
+                                    },
+                                    "ifsc_code": {
+                                        "description": "IFSC number for bank",
+                                        "type": "string",
+                                        "example": "ICI232322"
+                                    },
+                                    "bank_name": {
+                                        "description": "Bank name",
+                                        "type": "string",
+                                        "example": "SBI"
+                                    },
+                                    "branch_name": {
+                                        "description": "Branch name of bank",
+                                        "type": "string",
+                                        "example": "C.G. Road Branch"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/delete-bank-account": {
+            "delete": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Delete Bank Account",
+                "description": "Delete Bank Account",
+                "operationId": "deleteBankAccount",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/save-user-location": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Save user location",
+                "description": "Save user location",
+                "operationId": "save-user-location",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "latitude": {
+                                        "type": "string",
+                                        "example": "23.0225"
+                                    },
+                                    "longitude": {
+                                        "type": "string",
+                                        "example": "72.5714"
+                                    },
+                                    "country_id": {
+                                        "type": "integer",
+                                        "example": ""
+                                    },
+                                    "state_id": {
+                                        "type": "integer",
+                                        "example": ""
+                                    },
+                                    "district_id": {
+                                        "type": "integer",
+                                        "example": ""
+                                    },
+                                    "taluka_id": {
+                                        "type": "integer",
+                                        "example": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/user-profile": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get User Profile",
+                "description": "Get User Profile",
+                "operationId": "getUserProfile",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User Id (optional) - If not passed then loggedin user id will be used",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/edit-user-profile": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Edit User Profile",
+                "description": "Edit User Profile",
+                "operationId": "editUserProfile",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string",
+                                        "example": "xyz"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "example": "xyz"
+                                    },
+                                    "username": {
+                                        "type": "string",
+                                        "example": "xyz123"
+                                    },
+                                    "gender": {
+                                        "type": "string",
+                                        "example": "male"
+                                    },
+                                    "profession": {
+                                        "type": "string",
+                                        "example": "Bike rider expert"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "xyz@example.com"
+                                    },
+                                    "contact_number": {
+                                        "type": "string",
+                                        "example": "+919712585432"
+                                    },
+                                    "whatsapp_number": {
+                                        "type": "string",
+                                        "example": "+919712585432"
+                                    },
+                                    "about_me": {
+                                        "type": "string",
+                                        "example": "I am bike rider expert from india."
+                                    },
+                                    "profile_picture": {
+                                        "type": "file"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/edit-user-email": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Edit User email",
+                "description": "Edit User email",
+                "operationId": "editUserEmail",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "email"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "xyz@example.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/follow-unfollow": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Follow Unfollow",
+                "description": "Follow Unfollow User - action can be (follow, unfollow)",
+                "operationId": "followUnfollow",
+                "parameters": [
+                    {
+                        "name": "follow_id",
+                        "in": "query",
+                        "description": "User ID to follow",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "action",
+                        "in": "query",
+                        "description": "Follow or Unfollow",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "follow",
+                            "enum": [
+                                "follow",
+                                "unfollow"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/popular-creators": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get Popular Creators",
+                "description": "Get Popular Creators",
+                "operationId": "getPopularCreators",
+                "parameters": [
+                    {
+                        "name": "search_term",
+                        "in": "query",
+                        "description": "Search Term/Text",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page No. (optional) - default 1",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per Page (optional) - default 15",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/api/v1/user-dashboard": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get User Dashboard",
+                "description": "Get User Dashboard",
+                "operationId": "getUserDashboard",
+                "parameters": [
+                    {
+                        "name": "filter_by",
+                        "in": "query",
+                        "description": "Filter data based on dates (Optional)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "all",
+                            "enum": [
+                                "today",
+                                "yesterday",
+                                "7-day",
+                                "this-month",
+                                "last-month",
+                                "all"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/creator-dashboard": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get Creator Dashboard",
+                "description": "Get Creator Dashboard",
+                "operationId": "getCreatorDashboard",
+                "parameters": [
+                    {
+                        "name": "filter_by",
+                        "in": "query",
+                        "description": "Filter data based on dates (Optional)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "all",
+                            "enum": [
+                                "today",
+                                "yesterday",
+                                "7-day",
+                                "this-month",
+                                "last-month",
+                                "all"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/my-purchased-master-class": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get User Purchased Master Class",
+                "description": "Get User Purchased Master Class",
+                "operationId": "myPurchasedMasterClass",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page No. (optional) - default 1",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per Page (optional) - default 15",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/view-notifications": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get User Notifications List",
+                "description": "Get User Notifications List",
+                "operationId": "viewNotifications",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page No. (optional) - default 1",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per Page (optional) - default 15",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/phone-exist": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Check Phone Exist",
+                "description": "Check Phone Exist",
+                "operationId": "phone-exist",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "phone_number"
+                                ],
+                                "properties": {
+                                    "phone_number": {
+                                        "type": "string",
+                                        "example": "9999999999"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/v1/update-password": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update user password",
+                "description": "Update user password",
+                "operationId": "updatePassword",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "phone_number",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "phone_number": {
+                                        "description": "Phone number of the user",
+                                        "type": "string",
+                                        "example": "999999999"
+                                    },
+                                    "password": {
+                                        "description": "Password",
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "secret"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/v1/user-followers": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get User Followers",
+                "description": "Get User Followers",
+                "operationId": "getUserFollowers",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User Id (optional) - If not passed then loggedin user id will be used",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/user-following": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get User Following",
+                "description": "Get User Following",
+                "operationId": "getUserFollowing",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User Id (optional) - If not passed then loggedin user id will be used",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/user-subtree": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get User Sub Tree",
+                "description": "Get User Sub Tree",
+                "operationId": "getUserSubTree",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User Id (optional) - If not passed then loggedin user id will be used",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "role",
+                        "in": "query",
+                        "description": "User Role",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "creator",
+                            "enum": [
+                                "creator",
+                                "agent",
+                                "user"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page No. (optional) - default 1",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per Page (optional) - default 15",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/block-user": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Block User",
+                "description": "Block User - action can be (block, unblock)",
+                "operationId": "blockUser",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User ID to block/unblock",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "action",
+                        "in": "query",
+                        "description": "Block or Unblock",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "block",
+                            "enum": [
+                                "block",
+                                "unblock"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/get-wallet-balance": {
+            "get": {
+                "tags": [
+                    "Wallet"
+                ],
+                "summary": "Get User Wallet Balance with transaction history",
+                "description": "Get User Wallet Balance with transaction history",
+                "operationId": "getWalletBalance",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page No. (optional) - default 1",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per Page (optional) - default 15",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/add-balance-to-wallet": {
+            "post": {
+                "tags": [
+                    "Wallet"
+                ],
+                "summary": "Add balance to wallet",
+                "description": "Add balance to wallet API",
+                "operationId": "addBalanceToWallet",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "amount"
+                                ],
+                                "properties": {
+                                    "amount": {
+                                        "type": "number",
+                                        "format": "double",
+                                        "example": "100"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/withdraw-from-wallet": {
+            "post": {
+                "tags": [
+                    "Wallet"
+                ],
+                "summary": "Withdraw from wallet",
+                "description": "Withdraw from wallet API",
+                "operationId": "withdrawFromWallet",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "amount"
+                                ],
+                                "properties": {
+                                    "amount": {
+                                        "type": "number",
+                                        "format": "double",
+                                        "example": "100"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/send-gift-to-creator": {
+            "post": {
+                "tags": [
+                    "Wallet"
+                ],
+                "summary": "Send Gift Amount to Creator",
+                "description": "Send Gift Amount to Creator API",
+                "operationId": "sendGiftToCreator",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "creator_id",
+                                    "amount"
+                                ],
+                                "properties": {
+                                    "creator_id": {
+                                        "type": "number",
+                                        "format": "integer",
+                                        "example": "1"
+                                    },
+                                    "amount": {
+                                        "type": "number",
+                                        "format": "double",
+                                        "example": "100"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/gift-transactions": {
+            "get": {
+                "tags": [
+                    "Wallet"
+                ],
+                "summary": "Gift transaction history with filters",
+                "description": "Gift transaction history with filters",
+                "operationId": "giftTransactions",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page No. (optional) - default 1",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per Page (optional) - default 15",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "filter_by",
+                        "in": "query",
+                        "description": "Filter data based on dates (Optional)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "all",
+                            "enum": [
+                                "today",
+                                "yesterday",
+                                "7-day",
+                                "this-month",
+                                "last-month",
+                                "all"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/my-earning": {
+            "get": {
+                "tags": [
+                    "Wallet"
+                ],
+                "summary": "Get my earning history with filters",
+                "description": "Get my earning history with filters",
+                "operationId": "myEarning",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page No. (optional) - default 1",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per Page (optional) - default 15",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "filter_by",
+                        "in": "query",
+                        "description": "Filter data based on dates (Optional)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "all",
+                            "enum": [
+                                "today",
+                                "yesterday",
+                                "7-day",
+                                "this-month",
+                                "last-month",
+                                "all"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/my-team-earning": {
+            "get": {
+                "tags": [
+                    "Wallet"
+                ],
+                "summary": "Get my team earning history with filters",
+                "description": "Get my team earning history with filters",
+                "operationId": "myTeamEarning",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page No. (optional) - default 1",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Per Page (optional) - default 15",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "filter_by",
+                        "in": "query",
+                        "description": "Filter data based on dates (Optional)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "all",
+                            "enum": [
+                                "today",
+                                "yesterday",
+                                "7-day",
+                                "this-month",
+                                "last-month",
+                                "all"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "description": "Enter your Bearer Token",
+                "scheme": "bearer"
+            }
+        }
+    }
+}

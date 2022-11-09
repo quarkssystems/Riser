@@ -1,0 +1,38 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.riser.wespiremedia",
+      "sha256_cert_fingerprints":
+        ["06:03:AD:D1:E7:5F:26:8A:9F:52:35:6E:C7:9D:36:B7:29:95:72:F7:E9:3C:7B:99:D0:34:1A:2F:2C:EB:7A:78"]
+    }
+  },
+  {
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.riser.wespiremedia",
+    "sha256_cert_fingerprints":
+    ["08:A1:CA:9D:BD:17:2D:08:E7:1B:35:0B:EE:ED:9E:49:34:5A:88:19:7C:8E:2B:CF:05:0E:2D:D3:CE:A3:C4:27"]
+  }
+  },
+  {
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.riser.wespiremedia",
+    "sha256_cert_fingerprints":
+    ["76:A8:2C:20:3B:E9:5D:2C:9B:35:97:96:44:C3:2F:66:C9:7B:C2:62:DA:0D:C3:49:2E:C0:52:48:FD:3E:96:71"]
+  }
+  },
+  {
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.riser.wespiremedia",
+    "sha256_cert_fingerprints":
+    ["42:CB:B2:91:58:A8:29:CC:5F:C8:E8:90:2E:C9:0D:EF:64:AB:0E:CB:22:51:DA:7A:5F:D5:7E:5E:D4:FC:2A:5F"]
+  }
+  }
+]

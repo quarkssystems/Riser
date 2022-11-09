@@ -1,0 +1,8 @@
+.error {
+  color:  red;
+  font-weight: normal !important;
+}
+
+.select2-container {
+    max-width: 100%;
+}
